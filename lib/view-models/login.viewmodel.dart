@@ -1,17 +1,15 @@
-import 'package:meuteste/view-models/viewmodel.dart';
+import 'package:meuteste/flunt/validation-contract.dart';
+import 'package:meuteste/flunt/notifiable.dart';
 
-class LoginViewModel with ViewModel {
+class LoginViewModel with Notifiable {
   bool busy = false;
   String email = "";
   String password = "";
 
   validate() {
     clear();
-    if (email.length < 5)
-      errors.add(new ViewModelError(key: "email", message: "E-mail inválido"));
-
-    if (password.length < 5)
-      errors
-          .add(new ViewModelError(key: "password", message: "Senha inválida"));
+    var contract = new ValidationContract(errors);
+    contract.isEmail(email, "email", "E-mail inválido");
+    contract.hasMinLen(password, 6, "password", "Senha inválida");
   }
 }

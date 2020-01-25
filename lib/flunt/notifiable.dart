@@ -1,18 +1,14 @@
-class ViewModelError {
-  String key = "";
-  String message = "";
+import 'package:meuteste/flunt/notification.dart';
 
-  ViewModelError({this.key, this.message});
-}
-
-class ViewModel {
-  List<ViewModelError> errors = new List<ViewModelError>();
+class Notifiable {
+  List<Notification> errors = new List<Notification>();
 
   clear() {
-    errors = new List<ViewModelError>();
+    errors = new List<Notification>();
   }
 
-  addError(ViewModelError error) {
+  addError(Notification error) {
+    if (error == null) return;
     errors.add(error);
   }
 
